@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <>
-      <Box sx={{ }}>
+      <Box sx={{ marginTop: ['30%', '10%'] }}>
         <Button onClick={() => handleRegister()}>Welcome</Button>
       </Box>
       {collapse && (
@@ -62,7 +62,6 @@ const Login = () => {
             mb={3}
             onChange={(e) => dispatch({ type: 'ADD_EMAIL', payload: e.target.value })}
           />
-
           <Button mb="5" type="submit" onClick={handleSubmitButton}>Register</Button>
         </Box>
       </Box>

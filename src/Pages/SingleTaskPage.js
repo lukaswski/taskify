@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Message, Alert, Text} from 'theme-ui';
+import { Box, Button, Message, Alert, Text, Flex} from 'theme-ui';
 import { useRecoilValue } from 'recoil';
 import { useParams, useHistory } from 'react-router-dom';
 import Header from '../Components/Header';
@@ -25,46 +25,49 @@ const SingleTaskPage = () => {
   return (
     <>
       <Header />
-      <Box m="5">
-        <Button mb="5" type="button" onClick={() => handleBackToTasks()}>back</Button>
+      <Box sx={{margin: ['5%', '10%']}}>
+        <Flex sx={{justifyContent: 'space-between', alignItems: 'stretch' }}>
+          <Button mb="5" type="button" onClick={() => handleBackToTasks()}>back</Button>
+          <Button sx={{width: '60px', height: '30px'}} onClick={() => setCollapseOptions(!collapseOptions)}>
+            {dots}
+          </Button>
+        </Flex>
         {alert?.code == 204 && <Alert mb="3">
           <Text color="white">
             Task Deleted!
           </Text>
         </Alert>}
-        <Message sx={{bg: 'five', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <Box>
+        <Message sx={{bg: 'five', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', alignItems: 'center'}}>
+          <Box m='3'>
             <Text>
               {id}
             </Text>
           </Box>
-          <Box>
+          <Box m='3'>
           <Text variant="subtext">
             {singleTask(id)?.title}
           </Text>
           </Box>
           {singleTask(id)?.completed && <Box>task completed!</Box>}
-          <Button onClick={() => setCollapseOptions(!collapseOptions)}>
-            {dots}
-          </Button>
         </Message>
-        {collapseOptions && 
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <Button m="1" onClick={() => setCollapseEditTask(!collapseEditTask)}>Edit this task</Button>
-          <Button onClick={() => deleteData(id.slice(5),setAlert)}>Delete this task</Button>
-        </Box>
-        }
-        {collapseEditTask && 
-        <Box mt="4">
-            <AddForm postMethod={'Update'}/>
-        </Box>}
         <Button 
+          mb="5"
           variant="secondary" 
           type="button" 
           onClick={() => patchData({ user: user.data.name, completed: 'true' }, setAlert, id.slice(5))}
           >
           Task Done
         </Button>
+        {collapseOptions && 
+        <Box mt="5" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <Button m="1" onClick={() => setCollapseEditTask(!collapseEditTask)}>Edit task</Button>
+          <Button onClick={() => deleteData(id.slice(5),setAlert)}>Delete task</Button>
+        </Box>
+        }
+        {collapseEditTask && 
+        <Box mt="4">
+            <AddForm postMethod={'Update'}/>
+        </Box>}
       </Box>
       
     </>
