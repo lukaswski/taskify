@@ -30,12 +30,12 @@ const AddForm = ({ postMethod }) => {
     );
   return (
     <>
+      <Box as="form" onSubmit={(e) => e.preventDefault()} sx={{margin: '20px 10%'}}>
       {dataStatus?.code == 201 &&    
-      <Alert ml="6" mr="6" mt="2" mb="2" >
+      <Alert mt="2" mb="5" >
         new task onboard!: "{dataStatus.data.title}"
         <Close ml="auto" mr={-2} /> 
       </Alert> }
-      <Box as="form" onSubmit={(e) => e.preventDefault()} sx={{margin: '20px 10%'}}>
         <Flex>
           <Label>{postMethod}</Label>
           <Box>{chars}/300</Box>
