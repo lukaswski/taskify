@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import {
-  Card, Grid, Box, Button, Text,
+  Card, Flex, Box, Button, Text,
 } from 'theme-ui';
 import { useHistory } from 'react-router-dom';
 import { searchedListState } from '../RecoilState';
@@ -14,18 +14,18 @@ const SingleTask = () => {
     <>
       {serchedTasks.length !== 0
         ? (
-          <Grid width={[128, 292]} gap={3}>
-
+          <Flex sx={{ flexWrap: 'wrap' }}>
             {serchedTasks.map(({ id, title, completed }) => (completed !== true
               && (
               <Card
-                mt="3"
                 key={id}
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  maxWidth: 356,
+                  justifyContent: 'space-around',
+                  width: ['100%', null, '23%'],
+                  margin: '1%',
                   bg: 'five',
                   borderRadius: '20px',
                   padding: '20px',
@@ -49,7 +49,7 @@ const SingleTask = () => {
               </Card>
               )
             )).reverse()}
-          </Grid>
+          </Flex>
         ) : (
           <Box>
             <Text variant="subtext">
